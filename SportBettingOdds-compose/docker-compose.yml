@@ -1,0 +1,32 @@
+version: '3.9'
+networks:
+  sport-betting-odds-net:
+    driver: bridge
+services:
+  app-server:
+    container_name: app-server
+    image: sport-betting-odds/app-server
+    build:
+      context: ../
+      dockerfile: ./SportBettingOdds-compose/Dockerfile
+    networks:
+      - sport-betting-odds-net
+    restart: always
+    depends_on:
+      - db-server
+    ports:
+      - "8013:8013"
+      - "8000:8000"
+  db-server:
+    container_name: db-server
+    image: "postgres" # use latest official postgres version
+    env_file:
+      - database.env # configure postgres
+    networks:
+      - sport-betting-odds-net
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+volumes:
+  database-data:
