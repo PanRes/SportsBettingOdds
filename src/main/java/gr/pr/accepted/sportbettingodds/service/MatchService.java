@@ -10,6 +10,7 @@ import gr.pr.accepted.sportbettingodds.model.MatchOddsResponse;
 import gr.pr.accepted.sportbettingodds.repository.MatchOddRepository;
 import gr.pr.accepted.sportbettingodds.repository.MatchRepository;
 import gr.pr.accepted.sportbettingodds.util.ResponseUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,5 +66,9 @@ public class MatchService {
 		return  responseUtil.createResponseMatchOdds(matchOddRepository.findAll());
 	}
 
+	public MatchOddsResponse deleteMatchById(UUID matchId) {
+		matchRepository.deleteById(matchId);
+		return new MatchOddsResponse(HttpStatus.NO_CONTENT);
+	}
 
 }

@@ -13,6 +13,13 @@ public class MatchOddsResponse {
 	private List<MatchDTO> matches = new ArrayList<>();
 	private List<MatchOddDTO> matchOdds = new ArrayList<>();
 
+	public MatchOddsResponse() {
+	}
+
+	public MatchOddsResponse(HttpStatus statusCode) {
+		this.statusCode = statusCode;
+	}
+
 	public HttpStatus getStatusCode() {
 		return statusCode;
 	}

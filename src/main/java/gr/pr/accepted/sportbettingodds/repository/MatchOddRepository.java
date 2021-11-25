@@ -14,4 +14,7 @@ public interface MatchOddRepository extends JpaRepository<MatchOdd, UUID> {
 	@Query("SELECT mo from MatchOdd mo where mo.match.id = :matchId")
 	List<MatchOdd> findByMatchId(UUID matchId);
 
+	@Query("delete from MatchOdd where match.id = :matchId")
+	List<MatchOdd> deleteByMatchId(UUID matchId);
+
 }
