@@ -75,4 +75,24 @@ public class SportBettingOddsService {
 		return responseUtil.createResponse(match, matchOddDTOs);
 	}
 
+	public MatchOddsResponse findAllMatches() {
+		return  responseUtil.createResponse(matchRepository.findAll());
+	}
+
+	public MatchOddsResponse findMatchById(UUID matchId) {
+		return  responseUtil.createResponse(matchRepository.findById(matchId).orElseThrow());
+	}
+
+	public MatchOddsResponse findAllMatchesAndOdds() {
+		return  responseUtil.createResponseMatchOdds(matchOddRepository.findAll());
+	}
+
+	public MatchOddsResponse findMatchOddsByMatchId(UUID matchId){
+		return responseUtil.createResponseMatchOdds(matchOddRepository.findByMatchId(matchId));
+	}
+
+	public MatchOddsResponse findMatchesOddById(UUID matchOddId) {
+		return  responseUtil.createResponse(matchOddRepository.findById(matchOddId).orElseThrow());
+	}
+
 }

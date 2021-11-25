@@ -10,7 +10,7 @@ public class MatchOddsResponse {
 
 	private HttpStatus statusCode;
 	private LocalDateTime timestamp = LocalDateTime.now();
-	private MatchDTO match;
+	private List<MatchDTO> matches = new ArrayList<>();
 	private List<MatchOddDTO> matchOdds = new ArrayList<>();
 
 	public HttpStatus getStatusCode() {
@@ -25,12 +25,12 @@ public class MatchOddsResponse {
 		return timestamp;
 	}
 
-	public MatchDTO getMatch() {
-		return match;
+	public List<MatchDTO> getMatches() {
+		return matches;
 	}
 
-	public void setMatch(MatchDTO match) {
-		this.match = match;
+	public void setMatches(List<MatchDTO> matches) {
+		this.matches = matches;
 	}
 
 	public List<MatchOddDTO> getMatchOdds() {
@@ -46,7 +46,7 @@ public class MatchOddsResponse {
 		return "MatchOddsResponse{" +
 				"statusCode=" + statusCode +
 				", timestamp=" + timestamp +
-				", match=" + match +
+				", match=" + matches +
 				", matchOdds=" + matchOdds +
 				'}';
 	}

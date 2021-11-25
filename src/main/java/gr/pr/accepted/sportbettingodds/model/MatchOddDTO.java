@@ -14,6 +14,7 @@ public class MatchOddDTO {
 	@NotNull
 	@Min(1)
 	private Double odds;
+	private UUID matchId;
 
 	public UUID getId() {
 		return id;
@@ -39,12 +40,21 @@ public class MatchOddDTO {
 		this.specifier = specifier;
 	}
 
+	public UUID getMatchId() {
+		return matchId;
+	}
+
+	public void setMatchId(UUID matchId) {
+		this.matchId = matchId;
+	}
+
 	@Override
 	public String toString() {
 		return "MatchOddDTO{" +
 				"id=" + id +
 				", specifier='" + specifier + '\'' +
 				", odds=" + odds +
+				", matchId=" + matchId +
 				'}';
 	}
 }
