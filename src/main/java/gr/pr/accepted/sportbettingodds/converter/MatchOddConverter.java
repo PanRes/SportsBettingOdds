@@ -5,8 +5,6 @@ import gr.pr.accepted.sportbettingodds.entity.MatchOdd;
 import gr.pr.accepted.sportbettingodds.model.MatchOddDTO;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class MatchOddConverter {
 
