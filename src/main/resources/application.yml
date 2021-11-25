@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: docker
   jpa:
     properties:
       hibernate:
@@ -9,3 +12,20 @@ spring:
     username: root
     password: root
 
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_database
+    username: root
+    password: root
+server:
+  port: 8023
