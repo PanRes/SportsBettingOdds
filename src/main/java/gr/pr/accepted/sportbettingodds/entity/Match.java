@@ -1,5 +1,6 @@
 package gr.pr.accepted.sportbettingodds.entity;
 
+import gr.pr.accepted.sportbettingodds.enums.SportType;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -32,7 +33,8 @@ public class Match {
 	private String teamB;
 
 	@Column(name = "sport", nullable = false)
-	private Integer sport;
+	@Enumerated(EnumType.ORDINAL)
+	private SportType sport;
 
 	@OneToMany(mappedBy = "match",cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<MatchOdd> matchOdds;
@@ -45,11 +47,11 @@ public class Match {
 		this.id = id;
 	}
 
-	public Integer getSport() {
+	public SportType getSport() {
 		return sport;
 	}
 
-	public void setSport(Integer sport) {
+	public void setSport(SportType sport) {
 		this.sport = sport;
 	}
 
