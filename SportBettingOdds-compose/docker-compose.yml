@@ -24,6 +24,7 @@ services:
       - database.env # configure postgres
     networks:
       - sport-betting-odds-net
+    restart: always
     volumes:
       - database-data:/var/lib/postgresql/data/
     ports:
