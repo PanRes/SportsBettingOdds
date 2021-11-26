@@ -12,6 +12,16 @@ spring:
     username: root
     password: root
 
+logging:
+  level:
+    bg:
+      vivacom:
+        combine:
+          save:
+            debundler: "info"
+  file:
+    path: ${user.home}/LOGS/SportBettingOdds/
+
 ---
 
 spring:
@@ -29,3 +39,12 @@ spring:
     password: root
 server:
   port: 8023
+logging:
+  level:
+    bg:
+      vivacom:
+        combine:
+          save:
+            debundler: "info"
+  file:
+    path: ${user.home}/LOGS/SportBettingOdds/
