@@ -1,6 +1,7 @@
 package gr.pr.accepted.sportbettingodds.model;
 
 import gr.pr.accepted.sportbettingodds.enums.SportType;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,16 +10,23 @@ import java.util.UUID;
 
 public class MatchDTO {
 
+	@ApiModelProperty
 	private UUID id;
+	@ApiModelProperty
 	private String description;
+	@ApiModelProperty(required = true)
 	@NotNull
 	private LocalDateTime matchDate;
+	@ApiModelProperty(required = true)
 	@NotNull
 	@NotBlank
 	private String teamA;
+	@ApiModelProperty(required = true)
 	@NotNull
 	@NotBlank
 	private String teamB;
+	@ApiModelProperty(required = true)
+	@NotNull
 	private SportType sport;
 
 	public UUID getId() {

@@ -1,5 +1,7 @@
 package gr.pr.accepted.sportbettingodds.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -7,13 +9,17 @@ import java.util.UUID;
 
 public class MatchOddDTO {
 
+	@ApiModelProperty
 	private UUID id;
+	@ApiModelProperty(required = true)
 	@NotNull
 	@NotBlank
 	private String specifier;
+	@ApiModelProperty(required = true)
 	@NotNull
 	@Min(1)
 	private Double odds;
+	@ApiModelProperty
 	private UUID matchId;
 
 	public UUID getId() {

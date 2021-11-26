@@ -1,5 +1,6 @@
 package gr.pr.accepted.sportbettingodds.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
@@ -8,9 +9,13 @@ import java.util.List;
 
 public class MatchOddsResponse {
 
+	@ApiModelProperty(required = true)
 	private HttpStatus statusCode;
+	@ApiModelProperty(required = true)
 	private LocalDateTime timestamp = LocalDateTime.now();
+	@ApiModelProperty
 	private List<MatchDTO> matches = new ArrayList<>();
+	@ApiModelProperty
 	private List<MatchOddDTO> matchOdds = new ArrayList<>();
 
 	public MatchOddsResponse() {
