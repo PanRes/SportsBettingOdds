@@ -4,6 +4,7 @@ import gr.pr.accepted.sportbettingodds.converter.MatchConverter;
 import gr.pr.accepted.sportbettingodds.converter.MatchOddConverter;
 import gr.pr.accepted.sportbettingodds.entity.Match;
 import gr.pr.accepted.sportbettingodds.entity.MatchOdd;
+import gr.pr.accepted.sportbettingodds.exception.DataNotFoundException;
 import gr.pr.accepted.sportbettingodds.model.MatchDTO;
 import gr.pr.accepted.sportbettingodds.model.MatchOddsRequest;
 import gr.pr.accepted.sportbettingodds.model.MatchOddsResponse;
@@ -67,7 +68,11 @@ public class MatchService {
 	}
 
 	public MatchOddsResponse deleteMatchById(UUID matchId) {
-		matchRepository.deleteById(matchId);
+		try {
+			matchRepository.deleteById(matchId);
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match not found", e);
+		}
 		return new MatchOddsResponse(HttpStatus.NO_CONTENT);
 	}
 

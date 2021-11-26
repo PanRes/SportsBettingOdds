@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import gr.pr.accepted.sportbettingodds.exception.DataNotFoundException;
+
 @Service
 public class MatchOddService {
 
@@ -33,14 +35,24 @@ public class MatchOddService {
 	}
 
 	public MatchOddsResponse insertMatchOdds(UUID matchId, List<MatchOddDTO> matchOddDTOS) {
-		Match match = matchRepository.getById(matchId);
+		Match match;
+		try {
+			match = matchRepository.getById(matchId);
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match not found", e);
+		}
 		List<MatchOdd> matchOdds = matchOddDTOS.stream().map(matchOddDTO -> matchOddConverter.convert(match, matchOddDTO)).collect(Collectors.toList());
 		matchOddRepository.saveAllAndFlush(matchOdds);
 		return responseUtil.createResponse(matchOdds, matchOddDTOS);
 	}
 
 	public MatchOddsResponse updateMatchOdd(UUID matchId, List<MatchOddDTO> matchOddDTOs) {
-		Match match = matchRepository.getById(matchId);
+		Match match;
+		try {
+			match = matchRepository.getById(matchId);
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match not found", e);
+		}
 		List<MatchOdd> matchOdds = new ArrayList<>();
 		for (MatchOddDTO matchOddDTO : matchOddDTOs) {
 			matchOdds.add(matchOddConverter.convert(match, matchOddDTO));
@@ -52,20 +64,32 @@ public class MatchOddService {
 	}
 
 	public MatchOddsResponse findMatchesOddById(UUID matchOddId) {
-		return  responseUtil.createResponse(matchOddRepository.findById(matchOddId).orElseThrow());
+		return  responseUtil.createResponse(matchOddRepository.findById(matchOddId).orElseThrow(() -> new DataNotFoundException("Match Odd not found")));
 	}
 
 	public MatchOddsResponse findMatchOddsByMatchId(UUID matchId){
-		return responseUtil.createResponseMatchOdds(matchOddRepository.findByMatchId(matchId));
+		try {
+			return responseUtil.createResponseMatchOdds(matchOddRepository.findByMatchId(matchId));
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match not found", e);
+		}
 	}
 
 	public MatchOddsResponse deleteAllOddsMatchById(UUID matchId) {
-		matchOddRepository.deleteByMatchId(matchId);
+		try {
+			matchOddRepository.deleteByMatchId(matchId);
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match not found", e);
+		}
 		return new MatchOddsResponse(HttpStatus.NO_CONTENT);
 	}
 
 	public MatchOddsResponse deleteMatchOddById(UUID matchOddId) {
-		matchOddRepository.deleteById(matchOddId);
+		try {
+			matchOddRepository.deleteById(matchOddId);
+		} catch (Exception e) {
+			throw new DataNotFoundException("Match Odd not found", e);
+		}
 		return new MatchOddsResponse(HttpStatus.NO_CONTENT);
 	}
 }
